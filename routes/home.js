@@ -1,9 +1,9 @@
 var ejs = require('ejs');
-var mysql = require('./mysql');
+var db = require('../models/db.js');
 
 exports.signUp = function(req, res) {
 	res.render('signUp', {
-		title : 'Express'
+		title : 'Ebay'
 	});
 }
 
@@ -25,19 +25,19 @@ exports.afterSignUp = function(req, res) {
 		if(fname.length > 0 && lname.length > 0
 				&& email.length > 0
 				&& pass.length >=6 ) {
-			mysql.insertData(function(err, result) {
+			db.insertData(function(err, result) {
 				if (err)
 					throw err;
 				else {
 					res.render('signIn', {
-						title : 'Express'
+						title : 'Ebay'
 					});
 				}
 			}, userInfo);
 		} else {
 			console.log("invalid sign up information.")
 			res.render('signUp', {
-				title : 'Express'
+				title : 'Ebay'
 			});
 		}
 	//}else {
@@ -50,7 +50,7 @@ exports.afterSignUp = function(req, res) {
 
 exports.signIn = function(req, res) {
 	res.render('signIn', {
-		title : 'Express'
+		title : 'Ebay'
 	});
 }
 
@@ -61,7 +61,7 @@ exports.afterSignIn = function(req, res) {
 		+ req.param("email") + "', '" + req.param("pass") + "')";
 	console.log("Query is: " + getUser);
 	
-	mysql.fetchData(function(err, result) {
+	db.fetchData(function(err, result) {
 		if (err)
 			throw err;
 		else {
@@ -70,7 +70,7 @@ exports.afterSignIn = function(req, res) {
 				req.session.user = result[0];
 				console.log("valid login~~");
 				res.render('homepage', {
-					title : 'Express'
+					title : 'Ebay'
 				});
 			}else {
 				console.log("invalid login");

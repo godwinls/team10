@@ -1,14 +1,7 @@
+var db = require('../models/db.js');
 
-/*
- * GET home page.
- */
-
-module.exports = function(app){
-	app.get('/', function (req, res) {
-		
-		
+exports.homepage = function(req, res) {
+	res.render('homepage', {
+		title : 'Ebay'
 	});
-	
-	
-	
 }
