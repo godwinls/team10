@@ -24,7 +24,7 @@ exports.afterSignUp = function(req, res) {
 		console.log("Query is: " + userInfo);
 		if(fname.length > 0 && lname.length > 0
 				&& email.length > 0
-				&& pass.length > 0) {
+				&& pass.length > 6) {
 			mysql.insertData(function(err, result) {
 				if (err)
 					throw err;

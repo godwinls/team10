@@ -16,7 +16,6 @@
   </style> 
   </head>
   <body>
-  	<%- include nav.ejs %>
   	<div class = "container">
   		<div class = "fail">
   			<h1>Sign in failed...</h1>
@@ -24,7 +23,7 @@
   			<br>
   			<h5>Please sign in again.</h5>
   		</div>
-  		<form method = "post" action = "/signIn">
+  		<form method = "get" action = "/signIn">
   		<p><input class = "signInAgain" type = "submit" name = "signInAgain" value = "Sign In"/>
   		</p>
   		</form>

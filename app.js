@@ -6,7 +6,7 @@
 var express = require('express')
   , session = require('express-session')
   , routes = require('./routes')
-  , user = require('./routes/user')
+  //, user = require('./routes/user')
   , http = require('http')
   , path = require('path')
   , home = require('./routes/home');
