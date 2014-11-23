@@ -4,12 +4,20 @@
  */
 
 var express = require('express')
+  , session = require('express-session')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , home = require('./routes/home');
 
 var app = express();
+
+app.use(session({secret: 'keyboard cat'}));
+app.use(function(req, res, next){ 
+	res.locals.session = req.session; 
+	next(); 
+});
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -27,8 +35,13 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+//app.get('/', routes.index);
+//app.get('/users', user.list);
+app.get('/signUp', home.signUp);
+app.post('/afterSignUp', home.afterSignUp);
+app.get('/signIn', home.signIn);
+app.get('/afterSignIn', home.afterSignIn);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
