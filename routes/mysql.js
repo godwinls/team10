@@ -39,7 +39,7 @@ function getConnectionFromPool(){
 	return get();
 }
 
-var CONNECTION_TYPE = "pool"; // one means getOneConnection(), pool means getConnectionFromPool()
+var CONNECTION_TYPE = "one"; // one means getOneConnection(), pool means getConnectionFromPool()
 
 function getConnection(type){
 	if(type == "pool")
@@ -62,6 +62,7 @@ function insertData(callback, sqlQuery){
 			callback(err, result);
 			console.log("creating successfully");
 			connection.end();
+			
 		}		
 	});
 }
