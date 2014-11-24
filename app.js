@@ -9,7 +9,8 @@ var express = require('express')
   //, user = require('./routes/user')
   , http = require('http')
   , path = require('path')
-  , home = require('./routes/home');
+  , home = require('./routes/home')
+  , admin = require('./routes/admin');
 
 var app = express();
 
@@ -37,11 +38,13 @@ if ('development' == app.get('env')) {
 
 //app.get('/', routes.index);
 //app.get('/users', user.list);
-app.get('/signIn_admin', home.signIn_admin);
 app.get('/signUp', home.signUp);
 app.post('/afterSignUp', home.afterSignUp);
 app.get('/signIn', home.signIn);
 app.get('/afterSignIn', home.afterSignIn);
+app.get('/signIn_admin', admin.signIn_admin);
+app.get('/afterSignIn_admin', admin.afterSignIn_admin);
+
 
 
 

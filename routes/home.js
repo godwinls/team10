@@ -1,12 +1,6 @@
 var ejs = require('ejs');
 var db = require('../models/db.js');
 
-exports.signIn_admin = function(req, res) {
-	res.render('signIn_admin', {
-		title : 'Express'
-	});
-	
-}
 
 exports.signUp = function(req, res) {
 	res.render('signUp', {
