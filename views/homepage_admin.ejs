@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Administrator Homepage</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <style>
+  body {
+  	font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif;
+  	color: #404040;
+  	background:;
+  }
+  .container {
+  	margin: 80px auto;
+  	width: 640px;
+  }
+  </style> 
+  
+  <script>
+  	
+  </script>
+  </head>
+  <body>
+  	<section class = "container">
+  		<div class = "home">
+  			<h1>Yelp!</h1>
+        </div>       
+   		
+   		<div id="list">
+   			<h1>List</h1>
+   			<div id="content"></div>       
+        </div>
+        
+        <form method="get" action="/listPerson">
+  		<p><input class = "listP" type = "submit" name = "listP" value = "List All Person"/>
+  		</p>
+  		</form>
+  		<form method="get" action="/listSeller">
+  		<p><input class = "listS" type = "submit" name = "listS" value = "List All Seller"/>
+  		</p>
+  		</form>
+  		<form method = "get" action = "/deleteC">
+  		<p><input class = "deleteC" type = "submit" name = "deleteC" value = "Delete Customer"/>
+  		</p>
+  		</form>
+  		<form method = "get" action = "/deleteS">
+  		<p><input class = "deleteS" type = "submit" name = "deleteS" value = "Delete Seller"/>
+  		</p>
+  		</form>
+  		
+  		<form method="get" action="/signOut">
+  		<p><input class = "signOut" type = "submit" name = "signOut" value = "Sign Out"/>
+  		</p>
+  		</form>
+  	</section>
+  </body>
+</html>

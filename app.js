@@ -37,10 +37,12 @@ if ('development' == app.get('env')) {
 
 //app.get('/', routes.index);
 //app.get('/users', user.list);
+app.get('/signIn_admin', home.signIn_admin);
 app.get('/signUp', home.signUp);
 app.post('/afterSignUp', home.afterSignUp);
 app.get('/signIn', home.signIn);
 app.get('/afterSignIn', home.afterSignIn);
+
 
 
 http.createServer(app).listen(app.get('port'), function(){

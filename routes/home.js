@@ -1,6 +1,13 @@
 var ejs = require('ejs');
 var mysql = require('./mysql');
 
+exports.signIn_admin = function(req, res) {
+	res.render('signIn_admin', {
+		title : 'Express'
+	});
+	
+}
+
 exports.signUp = function(req, res) {
 	res.render('signUp', {
 		title : 'Express'
@@ -22,9 +29,7 @@ exports.afterSignUp = function(req, res) {
 		var userInfo = "insert into Person (Person_first_name, Person_last_name, Person_zip, Person_address, Person_state, Person_city, Person_ssn, Person_email, Person_pass) values ('"
 				+ fname + "', '" + lname + "', '" + zip + "', '" + addr + "', '" + state + "', '" + city + "', '" + ssn + "', '" + email + "', '" + pass + "')";
 		console.log("Query is: " + userInfo);
-		if(fname.length > 0 && lname.length > 0
-				&& email.length > 0
-				&& pass.length >=6 ) {
+		if(fname.length > 0 && lname.length > 0 && email.length > 0 && pass.length >=6 ) {
 			mysql.insertData(function(err, result) {
 				if (err)
 					throw err;
