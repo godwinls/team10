@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>List all person</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <style>
+  body {
+  	font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif;
+  	color: #404040;
+  	background:;
+  }
+  .container {
+  	margin: 80px auto;
+  	width: 640px;
+  }
+  </style> 
+  
+  <script>
+  	
+  </script>
+  </head>
+  
+  <body>
+  	<br>
+  	<div id="gh" class="gh-flex gh-w gh-minH no-touch ">
+		<table class="gh-tbl">
+			<tbody>
+				<tr>
+					<td class="gh-td">
+						<a class="iclg" _sp="m570.l2586" id="gh-la"><img width="117" height="120" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0" alt="" src="https://secureir.ebaystatic.com/rs/v/apstidvcvu5pxlbxkphrrdo5iqv.png" id="gh-logo"></a>
+						<a class="iclg" _sp="m570.l2586" id="gh-la"><img width="250" height="200" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0" alt="" src="https://secureir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" id="gh-logo"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br>  
+  	<div><h1>All person are listed below</h1></div>
+  	<div>
+  	
+  		<% for(var i = 0; i < show.length;i++){%>
+  		<div>Name:<%= show[i].Person_first_name %> <%= show[i].Person_last_name %><br>Email: <%= show[i].Person_email %>
+  		<br>Address: <%= show[i].Person_address %>, <%= show[i].Person_city %>, <%= show[i].Person_state %>, <%= show[i].Person_zip %>
+  		<br>SSN: <%= show[i].Person_ssn %>
+  		</div>
+  		<br>
+  		<% } %>	
+   	</div>
+   	<div>
+   		<form name="adminHomepage" id="adminHomepage" method="get" action="/toAdminHome">
+    		<input type="submit" name="sgnBt" value="Administrator Homepage">
+                                	
+    	</form>
+   	</div>
+  </body>
+</html>
