@@ -44,7 +44,9 @@ app.get('/signIn', home.signIn);
 app.get('/afterSignIn', home.afterSignIn);
 app.get('/signIn_admin', admin.signIn_admin);
 app.get('/afterSignIn_admin', admin.afterSignIn_admin);
-
+app.get('/signOut_admin', admin.signOut_admin);
+app.get('/listPerson', admin.listPerson);
+app.get('/toAdminHome', admin.toAdminHome);
 
 
 
