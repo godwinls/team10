@@ -4,13 +4,12 @@
 var mysql = require('mysql');
 
 //node Mysql pool
-var pool= mysql.createPool({
+var pool = mysql.createPool({
 	host:'localhost',
 	user:'root',
 	database:'mydb',
 	password: ''
 });
-
 
 //var sqlQuery = "insert into Person (Person_first_name, Person_last_name, Person_zip, Person_address, Person_state, Person_city, Person_ssn, Person_email, Person_pass) values " +
 //			   "('q', 'q', '95112', '53S 9th', 'CA', 'San Jose', '987654321', 'q@gmail.com', 'q')";

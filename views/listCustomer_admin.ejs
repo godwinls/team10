@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Welcome to eBay</title>
+  <title>List Customers</title>
   <meta content="text/html">
   <script></script>
   <div id="kgdiv"> 
@@ -93,7 +93,7 @@
                         <div id="mainCnt" class="sd-bc">
                           <div class="sd-lCont sd-fll">
                             <div>
-                              <h2 class="sd-txtA">Administrator Homepage</h2>
+                              <h2 class="sd-txtA">All customers are listed below</h2>
                               <div class="sd-spl">
                                 <div id="bubbleCnt1Oly_Outer" class="g-hdn" style="visibility : hidden;width:285px">
                                   <div id="cnbubbleCnt1">
@@ -111,39 +111,24 @@
                               </div>
                             </div>
                             <div>
-                              <span>
-
-                								<br>
-                								 <form method="get" action="/listPerson">
-                									<p><input class = "btn btn-prim sd-sgnBtn" type = "submit" name = "listP" value = "List All Customers/Sellers"/>
-                									</p>
-                									</form><br>
-                									<form method="get" action="/listCustomers">
-                									<p><input class = "btn btn-prim sd-sgnBtn" type = "submit" name = "listS" value = "List All Customers"/>
-                									</p>
-                									</form><br>
-                									<form method="get" action="/listSellers">
-                									<p><input class = "btn btn-prim sd-sgnBtn" type = "submit" name = "listS" value = "List All Sellers"/>
-                									</p>
-                									</form><br>
-                									<form method = "post" action = "/toDeleteC">
-                									<p><input class = "btn btn-prim sd-sgnBtn" type = "submit" name = "deleteC" value = "Deactivate Customer"/>
-                									</p>
-                									</form><br>
-                									<form method = "post" action = "/toDeleteS">
-                									<p><input class = "btn btn-prim sd-sgnBtn" type = "submit" name = "deleteS" value = "Deactivate Seller"/>
-                									</p>
-                									</form><br>
-                									<form method = "post" action = "/toDeleteProduct">
-                									<p><input class = "btn btn-prim sd-sgnBtn" type = "submit" name = "deleteP" value = "Delete Product"/>
-                									</p>
-                									</form><br>
-                									<form method="get" action="/signOut_admin">
-                									<p><input class = "btn btn-prim sd-sgnBtn" type = "submit" name = "signOut" value = "Sign Out"/>
-                									</p>
-                									</form><br>
-
-                              </span>
+                              <span>  
+  	<div>
+  	
+  		<% for(var i = 0; i < show.length;i++){%>
+  		<div>Name:<%= show[i].Person_first_name %> <%= show[i].Person_last_name %><br>Email: <%= show[i].Person_email %>
+  		<br>Address: <%= show[i].Person_address %>, <%= show[i].Person_city %>, <%= show[i].Person_state %>, <%= show[i].Person_zip %>
+  		<br>SSN: <%= show[i].Person_ssn %>
+  		</div>
+  		<br>
+  		<% } %>	
+   	</div>
+   	<div>
+   		<form name="adminHomepage" id="adminHomepage" method="get" action="/toAdminHome">
+    		<input type="submit" name="sgnBt" class="btn btn-prim sd-sgnBtn" value="Administrator Homepage">
+                                	
+    	</form>
+    </div>	
+   	</span>
                             </div>
                           </div>
                           

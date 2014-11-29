@@ -46,7 +46,13 @@ app.get('/signIn_admin', admin.signIn_admin);
 app.get('/afterSignIn_admin', admin.afterSignIn_admin);
 app.get('/signOut_admin', admin.signOut_admin);
 app.get('/listPerson', admin.listPerson);
+app.get('/listCustomers', admin.listCustomers);
+app.get('/listSellers', admin.listSellers);
 app.get('/toAdminHome', admin.toAdminHome);
+app.post('/toDeleteC', admin.toDeleteC);
+app.post('/deactivateC/:cid', admin.deactivateC);
+app.post('/toDeleteS', admin.toDeleteS);
+app.post('/deactivateS/:sid', admin.deactivateS);
 
 
 
