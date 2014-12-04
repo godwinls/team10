@@ -49,7 +49,7 @@ exports.toAdminHome = function(req, res) {
 }
 
 function getAllPerson(callback) {
-	var show = "select * from Person where Person_buy_status = 1 and Person_sell_status = 1";
+	var show = "select * from Person where Person_buyActivate = 1 and Person_sellActivate = 1";
 	//var post = [1];
 	console.log("Query is: " + show);
 	db.getConnection(function(err, connection) {
@@ -77,7 +77,7 @@ exports.listPerson = function(req, res) {
 }
 
 function getCustomers(callback) {
-	var show = "select * from Person where Person_buy_status = ?";
+	var show = "select * from Person where Person_buyActivate = ?";
 	var post = [1];
 	console.log("Query is: " + show);
 	db.getConnection(function(err, connection) {
@@ -106,7 +106,7 @@ exports.listCustomers = function(req, res) {
 }
 
 function getSellers(callback) {
-	var show = "select * from Person where Person_sell_status = ?";
+	var show = "select * from Person where Person_sellActivate = ?";
 	var post = [1];
 	console.log("Query is: " + show);
 	db.getConnection(function(err, connection) {
@@ -145,7 +145,7 @@ exports.toDeleteC = function(req, res) {
 exports.deactivateC = function(req, res) {
 	var id = req.params.cid;
 	console.log("customer id is::"+id);
-	var sql = " update Person set Person_buy_status = 0 where Person_id = ?";
+	var sql = " update Person set Person_buyActivate = 0 where Person_id = ?";
 	var post = [id];
 	console.log("sql::" + sql);
 	db.getConnection(function(err, connection) {
@@ -180,7 +180,7 @@ exports.toDeleteS = function(req, res) {
 exports.deactivateS = function(req, res) {
 	var id = req.params.sid;
 	console.log("customer id is::"+id);
-	var sql = " update Person set Person_sell_status = 0 where Person_id = ?";
+	var sql = " update Person set Person_sellActivate = 0 where Person_id = ?";
 	var post = [id];
 	console.log("sql::" + sql);
 	db.getConnection(function(err, connection) {
@@ -194,6 +194,59 @@ exports.deactivateS = function(req, res) {
 				connection.release();
 				getSellers(function(err,result) {
 					res.render('deleteSeller_admin', {
+						title : 'Ebay',
+						show : result
+					});
+				});
+			}
+		});
+	});
+}
+
+function getProducts(callback) {
+	var show = "select * from Product";
+	//var post = [1];
+	console.log("Query is: " + show);
+	db.getConnection(function(err, connection) {
+		var query = connection.query(show, function(err, result) {
+			if(err){
+				console.log("err message: " + err.message);
+			}else{
+				callback(err, result);
+				//console.log("info:"+callback);
+				console.log("\nConnection closed...");
+				connection.release();
+			}
+		});
+	});	
+}
+
+exports.toDeleteP = function(req, res) {
+	getProducts(function(err, result) {
+		res.render('deleteProduct_admin', {
+		title : 'Ebay',
+		show : result
+		});
+	});
+}
+
+exports.deleteP = function(req, res) {
+	var id = req.params.pid;
+	console.log("product id is::"+id);
+	var sql = "delete from Product where Product_id = ?";
+	var post = [id];
+	console.log("sql::" + sql);
+	db.getConnection(function(err, connection) {
+		var query = connection.query(sql, post, function(err, results) {
+			if(err){
+				console.log("err message: " + err.message);
+			}else{
+				//callback(err, results);
+				console.log("info:"+results);
+				console.log("\nConnection closed...");
+				connection.release();
+				getProducts(function(err,result) {
+					res.render('deleteProduct_admin', {
 						title : 'Ebay',
 						show : result
 					});

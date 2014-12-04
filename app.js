@@ -8,9 +8,17 @@ var express = require('express')
   , routes = require('./routes')
   //, user = require('./routes/user')
   , http = require('http')
-  , path = require('path')
-  , home = require('./routes/home')
-  , admin = require('./routes/admin');
+  , path = require('path');
+
+var home = require('./routes/home')
+  , admin = require('./routes/admin')
+  , signIn = require('./routes/signIn')
+  , signUp = require('./routes/signUp')
+  , index = require('./routes/index')
+  , user = require('./routes/user')
+  , activate = require('./routes/activate')
+  , category = require('./routes/category')
+  , edit = require('./routes/edit');
 
 var app = express();
 
@@ -38,10 +46,10 @@ if ('development' == app.get('env')) {
 
 //app.get('/', routes.index);
 //app.get('/users', user.list);
-app.get('/signUp', home.signUp);
-app.post('/afterSignUp', home.afterSignUp);
-app.get('/signIn', home.signIn);
-app.get('/afterSignIn', home.afterSignIn);
+app.get('/signUp', signUp.signUp);
+app.post('/afterSignUp', signUp.afterSignUp);
+app.get('/signIn', signIn.signIn);
+app.get('/afterSignIn', signIn.afterSignIn);
 app.get('/signIn_admin', admin.signIn_admin);
 app.get('/afterSignIn_admin', admin.afterSignIn_admin);
 app.get('/signOut_admin', admin.signOut_admin);
@@ -53,7 +61,16 @@ app.post('/toDeleteC', admin.toDeleteC);
 app.post('/deactivateC/:cid', admin.deactivateC);
 app.post('/toDeleteS', admin.toDeleteS);
 app.post('/deactivateS/:sid', admin.deactivateS);
-
+app.post('/toDeleteP', admin.toDeleteP);
+app.post('/deleteP/:pid', admin.deleteP);
+app.get('/myAccount', user.showUser);
+app.get('/buyHistory', user.showBuyHistory);
+app.get('/sellHistory', user.showSellHistory);
+app.get('/list/:cid', signIn.list);
+app.post('/bdeactivate', activate.bdeactivate);
+app.get('/signOut', index.signOut);
+app.get('/toHomepage', signIn.toHomepage);
+app.get('/toEditEmail', edit.toEditEmail);
 
 
 http.createServer(app).listen(app.get('port'), function(){

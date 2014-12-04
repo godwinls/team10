@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+  	<title>My Account</title>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  	</head>
+
+	<body>
+		<img width="250" height="200" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0" alt="" src="http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" id="gh-logo">
+    	<br>
+    	<br>
+    	<div><h2> My eBay </h2>
+    	Hi, <%= session.user.Person_first_name %> <%= session.user.Person_last_name %>!
+    	</div>
+    	<br>
+    	<div class="panel panel-primary">
+    		<div class="panel-heading">
+   				<h3 class="panel-title">Personal Information</h3>
+  			</div>
+  			<div class="panel-body">
+  				eBay Person ID : <%= session.user.Person_id %><br>
+  				First Name : <%= session.user.Person_first_name %>
+				<a href="/#" type="button" class="btn btn-default btn-xs">Edit</a>  				
+  				<br>
+  				Last Name :  <%= session.user.Person_last_name %>
+				<a href="/#" type="button" class="btn btn-default btn-xs">Edit</a> 				
+  				<br>
+  				SSN : <%= session.user.Person_ssn %>
+				<a href="/#" type="button" class="btn btn-default btn-xs">Edit</a>  				
+  				<br>
+  				Password : <%= session.user.Person_pass %>
+				<a href="/#" type="button" class="btn btn-default btn-xs">Edit</a>  				
+  				<br> 			
+  			</div>
+    	</div>
+    	
+    	<div class="panel panel-primary">
+    		<div class="panel-heading">
+   				<h3 class="panel-title">Contact Information</h3>
+  			</div>
+  			<div class="panel-body">
+  				Email : <%= session.user.Person_email %>
+				<a href="/toEditEmail" type="button" class="btn btn-default btn-xs">Edit</a>
+				<br> 
+  				Address :  <%= session.user.Person_address %>
+				<a href="/#" type="button" class="btn btn-default btn-xs">Edit</a>
+  				<br>
+  				City : <%= session.user.Person_city %>
+  				<a href="/#" type="button" class="btn btn-default btn-xs">Edit</a>  
+  				<br>
+  				State : <%= session.user.Person_state %>
+				<a href="/#" type="button" class="btn btn-default btn-xs">Edit</a>  				
+  				<br>
+  				Zipcode : <%= session.user.Person_zip %>
+				<a href="/#" type="button" class="btn btn-default btn-xs">Edit</a>  				
+  				<br>			
+  			</div>
+    	</div>
+    	
+    	<div class="panel panel-primary">
+    		<div class="panel-heading">
+   				<h3 class="panel-title">Buy History</h3>
+  			</div>
+  			<div class="panel-body">
+  				---- Click product name for details ----<br>
+  				<% for(var i=0; i<bresult.length; i++) { %>
+  					<p>Product Name : <a href="/transactions/<%= bresult[i].TransHistory_id %>"><%= bresult[i].Product_name%></a> </p>
+				<%}%>			
+  			</div>
+    	</div>
+    	
+    	<div class="panel panel-primary">
+    		<div class="panel-heading">
+   				<h3 class="panel-title">Sell History</h3>
+  			</div>
+  			<div class="panel-body">
+  				Seller Rate : <%= presult[0].Seller_rate%><br><br>
+  				---- Click product name for details ----<br>
+  				<% for(var i=0; i<sresult.length; i++) { %>
+  					<p><a href="/transactions/<%= sresult[i].TransHistory_id %>"><%= sresult[i].Product_name%></a> </p>
+				<%}%>		
+  			</div>
+    	</div>
+		
+		<div>
+   		<a href="/toHomepage" type="button" class="btn btn-primary">Homepage</a> 
+    	</div>
+    	<br>
+    	<br>
+	</body>
+</html>
