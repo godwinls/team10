@@ -7,7 +7,8 @@ exports.bactivate = function(req, res){
             throw err;
 		else{
 			req.session.user.Person_buyActivate= 1;
-			res.redirect('/');
+			//res.redirect('/');
+			res.send("200");
 		}
 	}, update);
 };
@@ -19,7 +20,8 @@ exports.sactivate = function(req, res){
             throw err;
 		else{
 			req.session.user.Person_sellActivate= 1;
-			res.redirect('/');
+			//res.redirect('/');
+			res.send("200");
 		}
 	}, update);
 };
@@ -43,6 +45,7 @@ exports.bdeactivate = function(req, res){
             throw err;
 		else{
 			req.session.user.Person_buyActivate= 0;
+			res.send("200");
 			//res.redirect('/');
 		}
 	}, update);
@@ -55,7 +58,8 @@ exports.sdeactivate = function(req, res){
             throw err;
 		else{
 			req.session.user.Person_sellActivate= 0;
-			res.redirect('/');
+			//res.redirect('/');
+			res.send("200");
 		}
 	}, update);
 };

@@ -15,7 +15,7 @@
   			$.ajax({
 			  url: "/list/"+catid,
 			  type: "get",
-			  success : function(data){
+			  success : function(data){		  
 			  	var tmp = "";
 			  	//console.log(JSON.stringify(data));
 			  	for(var i= 0; i < data.length; i++){
@@ -29,11 +29,72 @@
 			});
   		});
   		
+  		$("#changeC").click(function(){
+  			var changeObj = $(this);
+  			var str = changeObj.html();
+  			var url = "";
+  			if(str == "Deactivate customer account"){
+  				url = "/bdeactivate/";
+  			}else{
+  				url = "/bactivate/";
+  			}
+  			
+  			$.ajax({
+  				url: url,
+  				type: "post",
+  				success: function(data){
+  					console.log("succ");
+  					if(url == "/bdeactivate/"){
+  					  //console.log("a");
+  						changeObj.html("Activate customer account");
+  					}else{
+  						//console.log("d");
+  						changeObj.html("Deactivate customer account");
+  					}
+  					
+  				}
+  			});
+  			
+  			
+  		});
+  		
+  		$("#changeS").click(function(){
+  			var changeObj = $(this);
+  			var str = changeObj.html();
+  			var url = "";
+  			if(str == "Deactivate seller account"){
+  				url = "/sdeactivate/";
+  			}else{
+  				url = "/sactivate/";
+  			}
+  			
+  			$.ajax({
+  				url: url,
+  				type: "post",
+  				success: function(data){
+  					console.log("succ");
+  					if(url == "/sdeactivate/"){
+  						console.log("a");
+  						changeObj.html("Activate seller account");
+  					}else{
+  						console.log("d");
+  						changeObj.html("Deactivate seller account");
+  					}
+  					
+  				}
+  			});
+  			
+  			
+  		});
+  		
+  		$("#options").change(function() {
+	 		$(this).css({'width':'400px'});
+	  	});
+  		
   	});
+   				  
+
   	
-  	$("#options").change(function() {
- 		$(this).css({'width':'400px'});
-  	});
   	
 	</script>
   </head>
@@ -57,10 +118,9 @@
 	    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      		<ul class="nav navbar-nav">
 	        		<li class="active"><a href="#">Sell<span class="sr-only">(current)</span></a></li>
-	        		<li><a class="buyer">
-	        				<div id="changeB">Deactivate customer account</div></a>
+	        		<li><a href="#" id="changeC">Deactivate customer account</a>
 	        		</li>
-	        		<li><a href="#">Deactivate seller account</a></li>
+	        		<li><a href="#" id="changeS">Deactivate seller account</a></li>
 	        		
 	      		</ul>
 	      		
@@ -76,7 +136,7 @@
             				<li><a href="/signOut">Sign out</a></li>
           				</ul>
         			</li>
-	       			<li><a href="#" class="glyphicon glyphicon-shopping-cart"></a></li>
+	       			<li><a href="/toshoppingcart" class="glyphicon glyphicon-shopping-cart"></a></li>
 	       			
 	      		</ul>
 	    	</div><!-- /.navbar-collapse -->

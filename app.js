@@ -18,7 +18,8 @@ var home = require('./routes/home')
   , user = require('./routes/user')
   , activate = require('./routes/activate')
   , category = require('./routes/category')
-  , edit = require('./routes/edit');
+  , edit = require('./routes/edit')
+  , shoppingcart = require('./routes/shoppingcart');
 
 var app = express();
 
@@ -68,9 +69,15 @@ app.get('/buyHistory', user.showBuyHistory);
 app.get('/sellHistory', user.showSellHistory);
 app.get('/list/:cid', signIn.list);
 app.post('/bdeactivate', activate.bdeactivate);
+app.post('/bactivate', activate.bactivate);
+app.post('/sdeactivate', activate.sdeactivate);
+app.post('/sactivate', activate.sactivate);
 app.get('/signOut', index.signOut);
 app.get('/toHomepage', signIn.toHomepage);
 app.get('/toEditEmail', edit.toEditEmail);
+app.post('/editEmail', edit.editEmail);
+app.get('/toshoppingcart', shoppingcart.toshoppingcart);
+
 
 
 http.createServer(app).listen(app.get('port'), function(){
