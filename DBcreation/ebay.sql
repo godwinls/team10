@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`TransHistory` (
   `TransHistory_Buyer_id` INT(11) NULL DEFAULT NULL,
   `TransHistory_Seller_id` INT(11) NULL DEFAULT NULL,
   `TransHistory_Product_id` INT(11) NULL DEFAULT NULL,
-  `TransHistory_time` TIMESTAMP NULL DEFAULT NULL,
+  `TransHistory_time` DATETIME NOT NULL DEFAULT GETDATE(),
   `TransHistory_type` CHAR(1) NULL DEFAULT NULL,
   `TransHistory_rate` DOUBLE(2,1) NULL DEFAULT '0.0',
   PRIMARY KEY (`TransHistory_id`),
