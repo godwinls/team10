@@ -68,9 +68,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Shoppingcart` (
   `Item_id` INT(11) NOT NULL AUTO_INCREMENT,
   `Item_product_id` INT(11) NULL DEFAULT NULL,
   `Item_person_id` INT(11) NULL DEFAULT NULL,
+  `Item_seller_id` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`Item_id`),
   INDEX `fk_Shoppingcart_1_idx` (`Item_person_id` ASC),
   INDEX `fk_Shoppingcart_2_idx` (`Item_product_id` ASC),
+  INDEX `fk_Shoppingcart_3_idx` (`Item_seller_id` ASC),
   CONSTRAINT `fk_Shoppingcart_1`
     FOREIGN KEY (`Item_person_id`)
     REFERENCES `mydb`.`Person` (`Person_id`)
@@ -79,6 +81,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Shoppingcart` (
   CONSTRAINT `fk_Shoppingcart_2`
     FOREIGN KEY (`Item_product_id`)
     REFERENCES `mydb`.`Product` (`Product_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    CONSTRAINT `fk_Shoppingcart_3`
+    FOREIGN KEY (`Item_seller_id`)
+    REFERENCES `mydb`.`Seller` (`Seller_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
