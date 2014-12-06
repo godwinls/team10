@@ -8,7 +8,7 @@ exports.signIn = function(req, res) {
 };
 
 function getCategory(callback) {
-	var show = "select * from category";
+	var show = "select * from Category";
 	console.log("Query is: " + show);
 	db.fetchData(function(err, result) {
 		if (err)
