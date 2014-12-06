@@ -77,8 +77,8 @@ app.get('/toHomepage', signIn.toHomepage);
 app.get('/toEditEmail', edit.toEditEmail);
 app.post('/editEmail', edit.editEmail);
 app.get('/toshoppingcart', shoppingcart.toshoppingcart);
-
-
+app.post('/checkout', shoppingcart.checkout);
+app.get('/payment', shoppingcart.payment);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

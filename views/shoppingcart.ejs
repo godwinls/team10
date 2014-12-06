@@ -76,30 +76,36 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 	</div>
 </div>
 <div id="syncTotal" class="flarge fw-b ">
-	<span class="clr333">Total: </span>
-	<span class="clr333  normal ">$7,445.00</span>
+	<span>Total: </span>
+	<span>$<%=total%></span>
 		</div>
 <div class="ptcbtn" id="ptcRight">
-	<a id="ptcBtn" class="btn btn-prim" href="ptc?_trksid=p2046448.m2465" target="">Proceed to checkout</a>
-			</div>		
-
-<form action="/toHomepage" name="toHomepage" method="get" id="toHomepage" >
-	<button type="submit" class="btn btn-prim" style="width:213px;">Continue Shopping</button>
-</form>
-			
-			
-			
-			
-			
-			
+	<form method="get" action="/payment">
+	<input id="ptcBtn" class="btn btn-prim" type="submit" value="Proceed to checkout">
+	</form>
+</div>	
+	
+<div class="ptcbtn" id="ptcRight">
+	<form action="/toHomepage" name="toHomepage" method="get" id="toHomepage" >
+		<button type="submit" class="btn btn-prim" style="width:213px;">Continue Shopping</button>
+	</form>
+</div>
+					
 <p></p>
 </div>
 			  </div></div>
+			 
 						<div id="leftsection" class="fl clearfix">
+						 <% if(sc != null || sc.length != 0) {for(var i = 0; i < sc.length; i++) {%>
 							<div id="CARTSection" class="fl dib col_100p">
 								<div id="ShopCart" class="fl col_100p">
 	<div class="c-std">
-	<p></p><div id="sellerBucket_jomashop" class="fl col_100p">
+	<p></p>
+	
+	<!-- product section start -->
+	
+	
+	<div id="sellerBucket_jomashop" class="fl col_100p">
 	<div class="fl cart_sci b-ddd bgclr-fcfcfc col_100p" id="sc_jomashop">
 		<div class="sel_row sel_info_row" data-count="1" data-memberid="jomashop" data-rtdisable="true" id="jomashop">
 			<div class="fl">
@@ -111,14 +117,7 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
         
         
         <span class="mbg-l" role="presentation">
-			<a class="mbg-id" href="http://myworld.ebay.com/jomashop" title="jomashop">jomashop</a> (<a href="http://feedback.ebay.com/ws/eBayISAPI.dll?ViewFeedback&amp;userid=jomashop" aria-labelledby="jomashop's feedback score is 92525" title="jomashop's feedback score is 92525">92525</a>)</span>
-            
-            
-            
-            
-          
-			   
-		 
+			<a class="mbg-id" href="http://myworld.ebay.com/jomashop" title="jomashop"><%= sc[i].Item_seller_id%></a></span>
 	</div>
 </div>
 			</div>
@@ -156,7 +155,7 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
          <!--.............product picture..........................-->                       
                                 
                                 
-									<img border="0" src="http://thumbs4.ebaystatic.com/pict/1513307377954040_3.jpg" alt="Panerai Radiomir Black Seal Black Dial Black Leather Mens Watch PAM00292" data-echo="http://thumbs4.ebaystatic.com/pict/1513307377954040_3.jpg" class="lazyload mw140 mh140">
+									<img border="0" src="<%=sc[i].Product_img%>"  class="lazyload mw140 mh140">
 									</span>
 							</span> 
 						</span>
@@ -164,16 +163,6 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 <div class="fr  itemInfoColcart140 clearfix">
@@ -185,7 +174,7 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
     <!--..........product name...............-->
     
 		<div class="ff-ds3 fs16 mb5 fw-n sci-itmttl">
-			<a href="http://www.ebay.com/itm/151330737795">Panerai Radiomir Black Seal Black Dial Black Leather Mens Watch PAM00292</a>
+			<a href="http://www.ebay.com/itm/151330737795"><%=sc[i].Product_name%></a>
 </div>
 	
 		
@@ -211,18 +200,15 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
     
 				<div class="fl tr m0 p0 ff-ds3 fs12 prltv clr777 shqtycol140">							
 					<label for="qty_16091308201" class="lb">Quantity: </label>								
-							<input role="textbox" type="number" min="0" value="1" maxlength="5" class="ff-ds3 fs12 qtyTextBox" onkeyup="showUpdate('16091308201')" id="qty_16091308201">
-							<div class="updateqtyLink fs14 hide" id="uq_16091308201">
-								<a href="javascript:;" class="uqtyLink" data-irefid="16091308201" id="ul_16091308201">Update</a>
-							</div>
+							<span><%=sc[i].Product_quantity%></span>
+							
 						</div>
 				<span class="fr tr m0 p0 ff-ds3 fs16 clr000 prcol140 pb15">
                 
                 <!--..........product price...............-->
                 
                 
-					<div class="fw-b">
-								$7,445.00</div>
+					<div class="fw-b"><%=sc[i].Product_price%></div>
 						</span>	
 			</div>
 			<div class="fr pb15 col_100p">
@@ -246,29 +232,28 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 	</div><p></p>
 </div>
 
-
-
-
-
-
-
-
-
-
-
 </div>
+
+
+<!--product section end -->
+
+
 <div id="CartSummary" class="fr"></div></div>
 							<div id="SFLSection" class="fl dib col_100p">
 						  <div class="clearfix" style="clear:both;"></div></div>
 			  </div>
 					</div>
 			</div>
+			<%}}else{%>
+				<div id="CARTSection" class="fl dib col_100p""><h1>You have no products in shopping cart.</h1></div>
+			<%}%>
+			
 		</div>
-		<div id="pageParams" data-debug="false" data-sitespeed="false" data-scdetails="" data-signinurl="https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&amp;UsingSSL=1&amp;siteid=0&amp;co_partnerId=2&amp;pageType=2046448&amp;ru=http%3A%2F%2Fcart.payments.ebay.com%2Fsc%2Fview" data-uaurl="https://checkout.payments.ebay.com/ws/eBayISAPI.dll?UserAddressCmd&amp;addrid=762899219022&amp;_trksid=p5713.m3151&amp;ru=http://cart.payments.ebay.com/sc/uc?" data-issecurecart="false" data-buyerid="plumteng" data-isguestbuyer="false" data-isuserinitemiignaltest="true" data-itemterm="Item availability, pickup time and miles to store are approximate, not guaranteed and may vary depending on your location."> </div>
 		
-		
-<form name="subForm" id="subForm" action="#" method="post"></form>
 
+		<div id="pageParams" data-debug="false" data-sitespeed="false" data-scdetails="" data-signinurl="https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&amp;UsingSSL=1&amp;siteid=0&amp;co_partnerId=2&amp;pageType=2046448&amp;ru=http%3A%2F%2Fcart.payments.ebay.com%2Fsc%2Fview" data-uaurl="https://checkout.payments.ebay.com/ws/eBayISAPI.dll?UserAddressCmd&amp;addrid=762899219022&amp;_trksid=p5713.m3151&amp;ru=http://cart.payments.ebay.com/sc/uc?" data-issecurecart="false" data-buyerid="plumteng" data-isguestbuyer="false" data-isuserinitemiignaltest="true" data-itemterm="Item availability, pickup time and miles to store are approximate, not guaranteed and may vary depending on your location."> </div>
+
+		
 
 
 		<div id="spwoverlayWrapper"><div id="spwOverlay"><div id="spwolyheader"></div><div id="spwolybody" class="clearfix"></div><div id="spwolyfooter"></div><a id="spwolyCloseIcon" href="javascript:;"></a></div></div>

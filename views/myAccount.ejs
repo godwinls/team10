@@ -7,8 +7,9 @@
   	</head>
 
 	<body>
-		<img width="250" height="200" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:-47px;left:0" alt="" src="http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" id="gh-logo">
-    	<br>
+		<% include ./navheader.ejs %>
+		<br>
+		<img width="250" height="200" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:20px;left:0" alt="" src="http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" id="gh-logo">
     	<br>
     	<div><h2> My eBay </h2>
     	Hi, <%= session.user.Person_first_name %> <%= session.user.Person_last_name %>!
