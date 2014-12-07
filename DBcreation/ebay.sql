@@ -34,7 +34,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Person` (
   `Person_buyActivate` TINYINT(1) NULL DEFAULT '1',
   `Person_sellActivate` TINYINT(1) NULL DEFAULT '1',
   PRIMARY KEY (`Person_id`),
-  UNIQUE INDEX `Person_email_UNIQUE` (`Person_email` ASC))
+  UNIQUE INDEX `Person_email_UNIQUE` (`Person_email` ASC),
+  UNIQUE INDEX `Person_ssn_UNIQUE` (`Person_ssn` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
