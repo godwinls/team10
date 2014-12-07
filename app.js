@@ -81,11 +81,16 @@ app.post('/editEmail', edit.editEmail);
 app.get('/toshoppingcart', shoppingcart.toshoppingcart);
 app.post('/checkout', shoppingcart.checkout);
 app.get('/payment', shoppingcart.payment);
-app.get('/toProduct', product.toProduct);
-app.get('/toSell', sell.toSell);
-app.post('/afterAuctionSell',sell.afterAuctionSell);
-app.post('/afterSell',sell.afterSell);
+app.get('/productDetail/:proid', product.productDetail);
 
+app.get('/toEditPassword', edit.toEditPassword);
+app.post('/editPassword', edit.editPassword);
+app.get('/toEditNameAddress', edit.toEditNameAddress);
+app.post('/editNameAddress', edit.editNameAddress);
+
+app.get('/show/:id', trans.show);
+app.post('/rate',trans.rate);
+app.get('/user/:id', user.show);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

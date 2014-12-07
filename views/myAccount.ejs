@@ -59,7 +59,7 @@
   			<div class="panel-body">
   				---- Click product name for details ----<br>
   				<% for(var i=0; i<bresult.length; i++) { %>
-  					<p>Product Name : <a href="/transactions/<%= bresult[i].TransHistory_id %>"><%= bresult[i].Product_name%></a> </p>
+  					<p>Product Name : <a href="/show/<%= bresult[i].TransHistory_id %>"><%= bresult[i].Product_name%></a> </p>
 				<%}%>			
   			</div>
     	</div>
@@ -72,7 +72,7 @@
   				Seller Rate : <%= presult[0].Seller_rate%><br><br>
   				---- Click product name for details ----<br>
   				<% for(var i=0; i<sresult.length; i++) { %>
-  					<p><a href="/transactions/<%= sresult[i].TransHistory_id %>"><%= sresult[i].Product_name%></a> </p>
+  					<p><a href="/show/<%= sresult[i].TransHistory_id %>"><%= sresult[i].Product_name%></a> </p>
 				<%}%>		
   			</div>
     	</div>
