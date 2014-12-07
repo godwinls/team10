@@ -20,7 +20,8 @@ var home = require('./routes/home')
   , category = require('./routes/category')
   , edit = require('./routes/edit')
   , shoppingcart = require('./routes/shoppingcart')
-  , product = require('./routes/product');
+  , product = require('./routes/product')
+  , trans = require('./routes/trans');
 
 var app = express();
 
@@ -87,6 +88,8 @@ app.post('/editPassword', edit.editPassword);
 app.get('/toEditNameAddress', edit.toEditNameAddress);
 app.post('/editNameAddress', edit.editNameAddress);
 
+app.get('/show/:id', trans.show);
+app.post('/rate',trans.rate);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
