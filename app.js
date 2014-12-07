@@ -21,7 +21,7 @@ var home = require('./routes/home')
   , edit = require('./routes/edit')
   , shoppingcart = require('./routes/shoppingcart')
   , product = require('./routes/product')
-  , trans = require('./routes/trans');
+  , sell = require('./routes/sell');
 
 var app = express();
 

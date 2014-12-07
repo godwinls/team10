@@ -19,9 +19,7 @@
 			  	var tmp = "";
 			  	//console.log(JSON.stringify(data));
 			  	for(var i= 0; i < data.length; i++){
-			  		tmp += "<a href=";
-			  		tmp += "/productDetail/"+data[i].Product_id + '>';
-			  		tmp +=data[i].Product_name+"</a><br>";
+			  		tmp = "<form action=\"toProduct\" method=\"get\"><input type=\"hidden\" name=\"pid\" value=\""+data[i].Product_id+"\"><input class=\"btn btn-link\"  type=\"submit\" value=\""+data[i].Product_name+"\"></form>";
 			  	}
 			  	console.log(tmp);
 			  	$("#content_"+catid).html(tmp);
@@ -106,7 +104,7 @@
   	
   	<% include ./navheader.ejs %>
   	
-  	<img width="250" height="200" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:10px;left:30px" alt="" src="http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" id="gh-logo">
+  	<img href="/toHomepage" width="250" height="200" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:10px;left:30px" alt="" src="http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" id="gh-logo">
   	
   	<form class="navbar-form navbar-left" role="search" style="position:absolute; top:60px;left:270px" method = "get" action = "/search">
   		<div class="form-group" >Search products
