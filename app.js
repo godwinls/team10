@@ -19,7 +19,9 @@ var home = require('./routes/home')
   , activate = require('./routes/activate')
   , category = require('./routes/category')
   , edit = require('./routes/edit')
-  , shoppingcart = require('./routes/shoppingcart');
+  , edit1 = require('./routes/edit1')
+  , shoppingcart = require('./routes/shoppingcart')
+  , product = require('./routes/product');
 
 var app = express();
 
@@ -79,6 +81,13 @@ app.post('/editEmail', edit.editEmail);
 app.get('/toshoppingcart', shoppingcart.toshoppingcart);
 app.post('/checkout', shoppingcart.checkout);
 app.get('/payment', shoppingcart.payment);
+app.get('/productDetail/:proid', product.productDetail);
+
+app.get('/toEditPassword', edit1.toEditPassword);
+app.post('/editPassword', edit1.editPassword);
+app.get('/toEditNameAddress', edit1.toEditNameAddress);
+app.post('/editNameAddress', edit1.editNameAddress);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

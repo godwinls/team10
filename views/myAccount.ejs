@@ -13,6 +13,8 @@
     	<br>
     	<div><h2> My eBay </h2>
     	Hi, <%= session.user.Person_first_name %> <%= session.user.Person_last_name %>!
+    	<a href="/toEditNameAddress" type="button" class="btn btn-primary btn-xs">Edit Information</a>
+    	
     	</div>
     	<br>
     	<div class="panel panel-primary">
@@ -22,16 +24,12 @@
   		<table  class="panel-body">
   				<tr><td>eBay Person ID :</td> <td> &nbsp &nbsp &nbsp <%= session.user.Person_id %></td></tr>
   				<tr><td>First Name : </td> <td> &nbsp &nbsp &nbsp <%= session.user.Person_first_name %></td>
-				<td> &nbsp &nbsp &nbsp <a href="/#" type="button" class="btn btn-default btn-xs">Edit</a></td></tr>  				
   				
   				<tr><td>Last Name : </td> <td>  &nbsp &nbsp &nbsp <%= session.user.Person_last_name %></td>
-				<td> &nbsp &nbsp &nbsp <a href="/#" type="button" class="btn btn-default btn-xs">Edit</a></td></tr> 				
   				
   				<tr><td>SSN : </td> <td> &nbsp &nbsp &nbsp  <%= session.user.Person_ssn %></td>
-				<td> &nbsp &nbsp &nbsp <a href="/#" type="button" class="btn btn-default btn-xs">Edit</a></td></tr>  				
   				
   				<tr><td>Password : </td> <td> &nbsp &nbsp &nbsp  <%= session.user.Person_pass %></td>
-				<td> &nbsp &nbsp &nbsp <a href="/#" type="button" class="btn btn-default btn-xs">Edit</a></td></tr>  				
   							
   			</table>
     	</div>
@@ -42,19 +40,14 @@
   			</div>
   	<table class="panel-body">
   				<tr><td>Email : </td> <td> &nbsp &nbsp &nbsp <%= session.user.Person_email %></td>
-				<td> &nbsp &nbsp &nbsp <a href="/toEditEmail" type="button" class="btn btn-default btn-xs">Edit</a></td></tr>
 				 
   				<tr><td>Address : </td> <td> &nbsp &nbsp &nbsp  <%= session.user.Person_address %></td>
-				<td> &nbsp &nbsp &nbsp <a href="/#" type="button" class="btn btn-default btn-xs">Edit</a></td></tr>
   				
   				<tr><td>City : </td> <td> &nbsp &nbsp &nbsp <%= session.user.Person_city %></td>
-  				<td> &nbsp &nbsp &nbsp <a href="/#" type="button" class="btn btn-default btn-xs">Edit</a></td></tr>  
   				
   				<tr><td>State : </td> <td> &nbsp &nbsp &nbsp <%= session.user.Person_state %></td>
-				<td> &nbsp &nbsp &nbsp <a href="/#" type="button" class="btn btn-default btn-xs">Edit</a></td></tr>  				
   				
   				<tr><td>Zipcode : </td> <td> &nbsp &nbsp &nbsp <%= session.user.Person_zip %></td>
-				<td> &nbsp &nbsp &nbsp <a href="/#" type="button" class="btn btn-default btn-xs">Edit</a></td></tr>  				
   							
   			</table>
     	</div>
