@@ -90,6 +90,7 @@ app.post('/editNameAddress', edit.editNameAddress);
 
 app.get('/show/:id', trans.show);
 app.post('/rate',trans.rate);
+app.get('/user/:id', user.show);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
