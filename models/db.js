@@ -8,6 +8,9 @@ var pool = mysql.createPool({
 	host:'localhost',
 	user:'root',
 	database:'mydb',
+
+	password: 'root',
+
 	password: 'root'
 });
 

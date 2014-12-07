@@ -19,7 +19,10 @@ var home = require('./routes/home')
   , activate = require('./routes/activate')
   , category = require('./routes/category')
   , edit = require('./routes/edit')
-  , shoppingcart = require('./routes/shoppingcart');
+  , shoppingcart = require('./routes/shoppingcart')
+  , product = require('./routes/product')
+  , sell = require('./routes/sell');
+
 
 var app = express();
 
@@ -77,8 +80,12 @@ app.get('/toHomepage', signIn.toHomepage);
 app.get('/toEditEmail', edit.toEditEmail);
 app.post('/editEmail', edit.editEmail);
 app.get('/toshoppingcart', shoppingcart.toshoppingcart);
-
-
+app.post('/checkout', shoppingcart.checkout);
+app.get('/payment', shoppingcart.payment);
+app.get('/toProduct', product.toProduct);
+app.get('/toSell', sell.toSell);
+app.post('/afterAuctionSell',sell.afterAuctionSell);
+app.post('/afterSell',sell.afterSell);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

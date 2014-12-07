@@ -19,9 +19,7 @@
 			  	var tmp = "";
 			  	//console.log(JSON.stringify(data));
 			  	for(var i= 0; i < data.length; i++){
-			  		tmp += "<a href=";
-			  		tmp += "/buyPage/"+data[i].Product_id + '>';
-			  		tmp +=data[i].Product_name+"</a><br>";
+			  		tmp = "<form action=\"toProduct\" method=\"get\"><input type=\"hidden\" name=\"pid\" value=\""+data[i].Product_id+"\"><input class=\"btn btn-link\"  type=\"submit\" value=\""+data[i].Product_name+"\"></form>";
 			  	}
 			  	console.log(tmp);
 			  	$("#content_"+catid).html(tmp);
@@ -60,6 +58,7 @@
   		
   		$("#changeS").click(function(){
   			var changeObj = $(this);
+  			var changeSell = $("#sell");
   			var str = changeObj.html();
   			var url = "";
   			if(str == "Deactivate seller account"){
@@ -76,9 +75,11 @@
   					if(url == "/sdeactivate/"){
   						console.log("a");
   						changeObj.html("Activate seller account");
+  						changeSell.html("");
   					}else{
   						console.log("d");
   						changeObj.html("Deactivate seller account");
+  						changeSell.html("Sell");
   					}
   					
   				}
@@ -101,49 +102,9 @@
   
   <body>
   	
-  	<nav class="navbar navbar-default" role="navigation">
-  		<div class="container-fluid">
-    	<!-- Brand and toggle get grouped for better mobile display -->
-    		<div class="navbar-header">
-      			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        			<span class="sr-only">Toggle navigation</span>
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-      			</button>
-      			<a class="navbar-brand" href="/myAccount">Hi, <%= session.user.Person_first_name %>!</a>
-    		</div>
-
-    		<!-- Collect the nav links, forms, and other content for toggling -->
-	    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      		<ul class="nav navbar-nav">
-	        		<li class="active"><a href="#">Sell<span class="sr-only">(current)</span></a></li>
-	        		<li><a href="#" id="changeC">Deactivate customer account</a>
-	        		</li>
-	        		<li><a href="#" id="changeS">Deactivate seller account</a></li>
-	        		
-	      		</ul>
-	      		
-	      		<ul class="nav navbar-nav navbar-right">
-	        		<li class="dropdown">
-          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My eBay <span class="caret"></span></a>
-          				<ul class="dropdown-menu" role="menu">
-            				<li><a href="/myAccount">My account</a></li>
-            				<li><a href="/buyHistory">Purchase history</a></li>
-            				<li><a href="/sellHistory">Sell History</a></li>
-            				<li><a href="#">Bidding history</a></li>
-            				<li class="divider"></li>
-            				<li><a href="/signOut">Sign out</a></li>
-          				</ul>
-        			</li>
-	       			<li><a href="/toshoppingcart" class="glyphicon glyphicon-shopping-cart"></a></li>
-	       			
-	      		</ul>
-	    	</div><!-- /.navbar-collapse -->
-  		</div><!-- /.container-fluid -->
-	</nav>
+  	<% include ./navheader.ejs %>
   	
-  	<img width="250" height="200" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:10px;left:30px" alt="" src="http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" id="gh-logo">
+  	<img href="/toHomepage" width="250" height="200" style="clip:rect(47px, 118px, 95px, 0px); position:absolute; top:10px;left:30px" alt="" src="http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png" id="gh-logo">
   	
   	<form class="navbar-form navbar-left" role="search" style="position:absolute; top:60px;left:270px" method = "get" action = "/search">
   		<div class="form-group" >Search products
