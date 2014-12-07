@@ -19,7 +19,6 @@ var home = require('./routes/home')
   , activate = require('./routes/activate')
   , category = require('./routes/category')
   , edit = require('./routes/edit')
-  , edit1 = require('./routes/edit1')
   , shoppingcart = require('./routes/shoppingcart')
   , product = require('./routes/product');
 
@@ -83,10 +82,10 @@ app.post('/checkout', shoppingcart.checkout);
 app.get('/payment', shoppingcart.payment);
 app.get('/productDetail/:proid', product.productDetail);
 
-app.get('/toEditPassword', edit1.toEditPassword);
-app.post('/editPassword', edit1.editPassword);
-app.get('/toEditNameAddress', edit1.toEditNameAddress);
-app.post('/editNameAddress', edit1.editNameAddress);
+app.get('/toEditPassword', edit.toEditPassword);
+app.post('/editPassword', edit.editPassword);
+app.get('/toEditNameAddress', edit.toEditNameAddress);
+app.post('/editNameAddress', edit.editNameAddress);
 
 
 http.createServer(app).listen(app.get('port'), function(){
