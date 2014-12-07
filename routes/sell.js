@@ -34,7 +34,7 @@ exports.afterSell = function(req,res) {
 			if(err)
 				throw err;
 			else{
-				res.redirect('/homepage');
+				res.redirect('/toHomepage');
 				connection.release();
 			}
 		});
@@ -72,7 +72,7 @@ exports.afterAuctionSell = function(req, res) {
 				if(err)
 					throw err;
 				else{
-					res.redirect('/homepage');
+					res.redirect('/toHomepage');
 					connection.release();
 				}
 			});

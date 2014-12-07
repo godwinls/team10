@@ -19,13 +19,7 @@
 			  	var tmp = "";
 			  	//console.log(JSON.stringify(data));
 			  	for(var i= 0; i < data.length; i++){
-<<<<<<< HEAD
 			  		tmp = "<form action=\"toProduct\" method=\"get\"><input type=\"hidden\" name=\"pid\" value=\""+data[i].Product_id+"\"><input class=\"btn btn-link\"  type=\"submit\" value=\""+data[i].Product_name+"\"></form>";
-=======
-			  		tmp += "<a href=";
-			  		tmp += "/productDetail/"+data[i].Product_id + '>';
-			  		tmp +=data[i].Product_name+"</a><br>";
->>>>>>> refs/remotes/origin/master
 			  	}
 			  	console.log(tmp);
 			  	$("#content_"+catid).html(tmp);
