@@ -3,6 +3,7 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET SQL_SAFE_UPDATES = 0;
 
 -- -----------------------------------------------------
 -- Schema mydb
@@ -30,10 +31,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Person` (
   `Person_ssn` CHAR(9) NULL DEFAULT NULL,
   `Person_email` VARCHAR(45) NULL DEFAULT NULL,
   `Person_pass` VARCHAR(45) NULL DEFAULT NULL,
-  `Person_buyActivate` TINYINT(1) NULL DEFAULT '0',
-  `Person_sellActivate` TINYINT(1) NULL DEFAULT '0',
+  `Person_buyActivate` TINYINT(1) NULL DEFAULT '1',
+  `Person_sellActivate` TINYINT(1) NULL DEFAULT '1',
   PRIMARY KEY (`Person_id`),
-  UNIQUE INDEX `Person_email_UNIQUE` (`Person_email` ASC))
+  UNIQUE INDEX `Person_email_UNIQUE` (`Person_email` ASC),
+  UNIQUE INDEX `Person_ssn_UNIQUE` (`Person_ssn` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
@@ -45,7 +47,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `mydb`.`Seller` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Seller` (
-  `Seller_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Seller_id` INT(11) NOT NULL,
   `Person_id` INT(11) NULL DEFAULT NULL,
   `Seller_rate` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`Seller_id`),
@@ -123,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Product` (
   `Product_id` INT(11) NOT NULL AUTO_INCREMENT,
   `Product_name` VARCHAR(45) NULL DEFAULT NULL,
   `Product_category_id` INT(11) NULL DEFAULT NULL,
-  `Product_price` VARCHAR(45) NULL DEFAULT NULL,
+  `Product_price` float NULL DEFAULT NULL,
   `Product_condition` TINYINT(1) NULL DEFAULT '0',
   `Product_type` TINYINT(1) NULL DEFAULT '0' COMMENT 'condition is new/used\ntype is bid/sell',
   `Product_seller_id` INT(11) NULL DEFAULT NULL,
@@ -133,6 +135,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Product` (
   `Product_bid_start_time` DATETIME NULL DEFAULT NULL,
   `Product_bid_end_time` DATETIME NULL DEFAULT NULL,
   `Product_bid_end` TINYINT(1) NULL DEFAULT '0',
+  `Product_img` VARCHAR(1000) NULL DEFAULT NULL,
   PRIMARY KEY (`Product_id`),
   INDEX `fk_Product_1_idx` (`Product_seller_id` ASC),
   INDEX `fk_Product_2_idx` (`Product_category_id` ASC),
@@ -157,7 +160,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `mydb`.`Customer` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Customer` (
-  `Customer_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Customer_id` INT(11) NOT NULL,
   `Person_id` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`Customer_id`),
   INDEX `fk_Buyer_1_idx` (`Person_id` ASC),
@@ -210,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`TransHistory` (
   `TransHistory_Buyer_id` INT(11) NULL DEFAULT NULL,
   `TransHistory_Seller_id` INT(11) NULL DEFAULT NULL,
   `TransHistory_Product_id` INT(11) NULL DEFAULT NULL,
-  `TransHistory_time` DATETIME NOT NULL DEFAULT GETDATE(),
+  `TransHistory_time` TIMESTAMP NULL DEFAULT NULL,
   `TransHistory_type` CHAR(1) NULL DEFAULT NULL,
   `TransHistory_rate` DOUBLE(2,1) NULL DEFAULT '0.0',
   PRIMARY KEY (`TransHistory_id`),
@@ -253,11 +256,12 @@ TRIGGER `mydb`.`Person_AFTER_INSERT`
 AFTER INSERT ON `mydb`.`Person`
 FOR EACH ROW
 BEGIN 
-    INSERT INTO Seller (Person_id, Seller_rate) VALUES (NEW.Person_id, 0);
-    INSERT INTO Customer(Person_id) VALUES (NEW.Person_id);
+    INSERT INTO Seller (Seller_id, Person_id, Seller_rate) VALUES (New.Person_ssn, NEW.Person_id, 0);
+    INSERT INTO Customer(Customer_id,Person_id) VALUES (NEW.Person_ssn,NEW.Person_id);
     END$$
 
 
+/*
 USE `mydb`$$
 DROP TRIGGER IF EXISTS `mydb`.`TransHistory_AFTER_INSERT` $$
 USE `mydb`$$
@@ -273,6 +277,7 @@ BEGIN
     INSERT INTO xxxx VALUES(1);
     END IF;
     END$$
+    */
 
 USE `mydb`$$
 DROP TRIGGER IF EXISTS `mydb`.`TransHistory_AFTER_UPDATE` $$
@@ -284,7 +289,7 @@ AFTER UPDATE ON `TransHistory`
 FOR EACH ROW
     BEGIN 
     UPDATE Seller Set Seller.Seller_rate = (SELECT AVG(TransHistory.TransHistory_rate) FROM TransHistory
-    WHERE TransHistory.TransHistory_Seller_id= NEW.TransHistory_Seller_id) WHERE Seller.Seller_id = TransHistory.TransHistory_Seller_id;
+    WHERE TransHistory.TransHistory_Seller_id= NEW.TransHistory_Seller_id) WHERE Seller.Seller_id = NEW.TransHistory_Seller_id;
     END$$
 
 USE `mydb`$$
@@ -306,15 +311,21 @@ BEGIN
 USE `mydb` $$
 CREATE 
 	EVENT `Auction_end` 
-	ON SCHEDULE EVERY 1 MINUTE STARTS '2014-12-05 15:30:00' 
+	ON SCHEDULE EVERY 1 MINUTE STARTS '2014-12-05 14:57:00' 
 	DO BEGIN
-		-- change the Bid_end flag
-        UPDATE mydb.Product SET Product_bid_end = 1 WHERE Product_bid_end_time < now();
-        
-		-- Insert into transHistory of recently finished auction
+		        -- Insert into transHistory of recently finished auction
 		INSERT INTO mydb.TransHistory (TransHistory_Buyer_id, TransHistory_Seller_id, TransHistory_Product_id, TransHistory_time, TransHistory_type)
-        SELECT Bid_customer_id, Product_seller_id, Product_id, Bid_time, '1'  FROM mydb.Product, mydb.Bid WHERE Product_bid_end_time < now() AND Product_bid_end = 0 
+        SELECT Bid_customer_id, Product_seller_id, Product_id, Bid_time, '1'  FROM mydb.Product, mydb.Bid WHERE Product_bid_end_time<now() AND Product_bid_end =0 
 					AND Product_id = Bid_Product_id AND (Bid_product_id, Bid_price) IN (SELECT Bid_product_id, Max(Bid_price) FROM mydb.Bid GROUP BY Bid_product_id);
+        
+        CREATE TABLE test AS
+        SELECT Product_id FROM mydb.Product, mydb.Bid WHERE Product_bid_end_time<now() AND Product_bid_end =0 
+			   AND Product_id = Bid_Product_id AND (Bid_product_id, Bid_price) IN (SELECT Bid_product_id, Max(Bid_price) FROM mydb.Bid GROUP BY Bid_product_id);
+        UPDATE mydb.Product SET Product_quantity = Product_quantity-1 WHERE Product_id in (SELECT Product_id FROM test);
+        DROP TABLE test;
+           
+		-- change the Bid_end flag
+        UPDATE mydb.Product SET Product_bid_end = 1 WHERE Product_bid_end_time < now() AND Product_bid_end = 0;  
                     
 	END $$
 

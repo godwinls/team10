@@ -22,7 +22,7 @@
   			<div class="panel-body">
   				---- Click product name for details ----<br>
   				<% for(var i=0; i<bresult.length; i++) { %>
-  					<p>Product Name : <a href="/transactions/<%= bresult[i].TransHistory_id %>"><%= bresult[i].Product_name%></a> </p>
+  					<p>Product Name : <a href="/show/<%= bresult[i].TransHistory_id %>"><%= bresult[i].Product_name%></a> </p>
 				<%}%>			
   			</div>
     	</div>

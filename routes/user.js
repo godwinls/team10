@@ -32,6 +32,26 @@ exports.showUser = function(req, res){
 	},getUserInfo);
 }
 
+exports.show = function(req, res){
+	if(req.session.user.Person_id == req.params.id)
+		res.redirect('/myAccount');
+	else{
+		var user = "SELECT * FROM Person, Seller,Customer WHERE Person.Person_id = Seller.Person_id " +
+				"AND Person.Person_id = Customer.Person_id AND Person.Person_id = "+ req.params.id;
+		db.fetchData(function(err, result){
+			if(err)
+				throw err;
+			else{
+				res.render('user',{
+					title: result[0].Person_first_name +" "+ result[0].Person_last_name,
+					user: req.session.user,
+					result: result
+				})
+			}
+		},user);
+	}
+}
+
 exports.showBuyHistory = function(req, res){
 	var getUserInfo = "SELECT * FROM Person, Seller WHERE Person.Person_id = Seller.Person_id AND Person.Person_id = "+ req.session.user.Person_id;
 	var getBuyInfo = "SELECT * FROM TransHistory, Product, Customer WHERE Customer_id = TransHistory_Buyer_id AND TransHistory_Product_id = Product_id AND Customer.Person_id = "
